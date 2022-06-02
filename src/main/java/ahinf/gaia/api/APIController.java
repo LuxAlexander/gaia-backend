@@ -29,21 +29,20 @@ public class APIController {
         this.userRepo = ur;
     }
 
-    @ApiResponse(responseCode = "200", description = "Returns the Useremail for a given Username")
+    @ApiResponse(responseCode = "200", description = "Returns the User E-mail for a given Username")
     @ApiResponse(responseCode = "400", description = "No user found for given Username")
-    @GetMapping("getUsername/{username}")
-    public ResponseEntity<String> getUserId(@PathVariable String username) {
+    @GetMapping("getUseremail/{username}")
+    public ResponseEntity<String> getUserEmail(@PathVariable String username) {
         if (!userRepo.existsByUsername(username)) {
             return ResponseEntity.badRequest().body("No user found for given Name");
         }
-
-        List<String> userId =
+        List<String> email =
                 userRepo.findAll().stream()
                         .map(User::getEmail)
                         .filter(userUsername -> userUsername.equals(username))
                         .toList();
 
-        return ResponseEntity.ok(userId.get(0));
+        return ResponseEntity.ok(email.get(0));
     }
 
     @ApiResponse(responseCode = "200", description = "Returns the animaltypes")
@@ -53,7 +52,7 @@ public class APIController {
         List<String> types =
                 all.stream()
                         .map(Animal::getAnimalType)
-                        .filter(animal -> animalType.equals(animalType))
+                        .filter(animal -> animal.equals(animalType))
                         .toList();
         if (types.size() == 0) {
             return ResponseEntity.ok("There are none animals with the type: " + animalType);
