@@ -46,7 +46,7 @@ public class APIController {
         return ResponseEntity.ok(userId.get(0));
     }
 
-    @ApiResponse(responseCode = "200", description = "Returns the top 20 scores")
+    @ApiResponse(responseCode = "200", description = "Returns the animaltypes")
     @GetMapping("/getAnimalTypes/{animalType}")
     public ResponseEntity<String> getTypes(@PathVariable String animalType) {
         var all = animalrepo.findAll();
